@@ -1,8 +1,12 @@
 import express from "express";
+import router from "./src/routes/index.js";
+import config from "./src/utils/config.js";
 
 const app = express();
-const PORT = 5000;
 
-app.listen(5000, () => {
-    console.log(`Server is running at port ${PORT}`)
-})
+app.use(express.json());
+app.use("/api", router);
+
+app.listen(config.PORT, () => {
+    console.log(`Server is running at port ${config.PORT}`)
+});
