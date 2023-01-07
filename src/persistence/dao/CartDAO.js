@@ -14,6 +14,25 @@ class CartDAO extends DAOContainer {
         };
         return instance;
     };
+
+    async createCart(obj) {
+        try {
+            const newCart = new CartModel(obj);
+            const savedCart = await newCart.save();
+            return savedCart;
+        } catch (err) {
+            console.log(err)
+        }
+    };
+
+    async findCartByUserId(userId) {
+        try {
+            const cart = await CartModel.findOne({ userId });
+            return cart;
+        } catch (err) {
+            console.log(err)
+        };
+    };
 };
 
 export default CartDAO;
