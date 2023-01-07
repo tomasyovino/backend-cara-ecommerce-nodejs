@@ -1,28 +1,21 @@
-import { createUser, findUserByParam } from "../services/user.services.js";
+import { createUser, findAllUsers, findUserById, findUserByParam, getUserStats, updateUserById, deleteUserbyId, hashUserPassword, compareUserPassword } from "../services/user.services.js";
+import config from "../utils/config.js";
 import UserDTO from "../persistence/dto/UserDTO.js";
-import bcrypt from "bcrypt";
 
 async function createUserController(username, password, email) {
     try {
-        const hashedPassword = await bcrypt.hash(password, 8);
+        const hashedPassword = await hashUserPassword(password);
         return await createUser(username, hashedPassword, email);
     } catch (err) {
         console.log(err);
-    }
+    };
 };
 
 async function authenticateUserController(param, password, res) {
     try {
         const user = await findUserByParam(param);
         if(user) {
-            bcrypt.compare(password, user.password, (err, isMatch) => {
-                if (err) res.status(500).json(err);
-                if (isMatch) {
-                    const secureUser = new UserDTO(user)
-                    return res.status(201).json(secureUser);
-                }; 
-                return res.status(401).json({ message: "The user password is wrong"});
-            });
+            compareUserPassword(password, user, UserDTO, config.jwt_sec, res);
         } else {
             res.status(401).json({ message: "No user found" });
         };
@@ -31,4 +24,29 @@ async function authenticateUserController(param, password, res) {
     };
 };
 
-export { createUserController, authenticateUserController };
+async function findAllUsersController(query) {
+    return await findAllUsers(query);
+};
+
+async function findUserByIdController(id) {
+    const user = await findUserById(id)
+    return new UserDTO(user);
+};
+
+async function getUserStatsController(lastYear) {
+    return await getUserStats(lastYear);
+};
+
+async function updateUserByIdController(id, obj) {
+    return await updateUserById(id, obj);
+};
+
+async function deleteUserbyIdController(id) {
+    return await deleteUserbyId(id);
+};
+
+async function hashUserPasswordController(password) {
+    return await hashUserPassword(password);
+};
+
+export { createUserController, authenticateUserController, findAllUsersController, findUserByIdController, getUserStatsController, updateUserByIdController, deleteUserbyIdController, hashUserPasswordController };

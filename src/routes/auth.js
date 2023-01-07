@@ -25,7 +25,7 @@ authRouter.post("/login", async (req, res) => {
         await authenticateUserController(user, password, res);
     } catch (err) {
         res.status(500).json(err);
-    }
+    };
 });
 
 export default authRouter;

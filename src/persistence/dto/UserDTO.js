@@ -3,7 +3,7 @@ class UserDTO {
         this._id = data._id;
         this.username = data.username;
         this.email = data.email;
-        this.admin = data.admin;
+        this.isAdmin = data.isAdmin;
         this.createdAt = data.createdAt;
         this.updatedAt = data.updatedAt;
     };

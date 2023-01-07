@@ -31,12 +31,38 @@ class UserDAO extends DAOContainer {
     };
 
     async findUserByParam(param) {
-        const user = await UserModel.findOne({$or: [{ username: param }, { email: param }]}, (err, user) => {
-            if (err) console.log(err);
-            if (!user) return console.log("Credential does not match with any user");
-        }).clone();
+        try {
+            const user = await UserModel.findOne({$or: [{ username: param }, { email: param }]}, (err, user) => {
+                if (err) console.log(err);
+                if (!user) return console.log("Credential does not match with any user");
+            }).clone();
+    
+            return user;     
+        } catch (err) {
+            console.log(err)
+        };
+    };
 
-        return user;
+    async getUserStats(lastYear) {
+        try {
+            const data = await UserModel.aggregate([
+                { $match: { createdAt: { $gte: lastYear } } },
+                {
+                    $project: {
+                        month: { $month: "$createdAt" },
+                    },
+                },
+                {
+                    $group: {
+                        _id: "$month",
+                        total: { $sum: 1 },
+                    },
+                },
+            ]);
+            return data;
+        } catch (err) {
+            console.log(err)
+        };
     };
 };
 
