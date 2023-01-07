@@ -14,6 +14,16 @@ class ProductDAO extends DAOContainer {
         };
         return instance;
     };
+
+    async createProduct(obj) {
+        try {
+            const newProduct = new ProductModel(obj);
+            const product = await newProduct.save();
+            return product;
+        } catch (err) {
+            console.log(err)
+        }
+    };
 };
 
 export default ProductDAO;
