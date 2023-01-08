@@ -4,6 +4,7 @@ import productRouter from "./product.js";
 import cartRouter from "./cart.js";
 import orderRouter from "./order.js";
 import authRouter from "./auth.js";
+import paymentRouter from "./payment.js";
 
 const router = Router();
 
@@ -12,5 +13,6 @@ router.use("/product", productRouter);
 router.use("/cart", cartRouter);
 router.use("/order", orderRouter);
 router.use("/auth", authRouter);
+router.use("/checkout", paymentRouter);
 
 export default router;
