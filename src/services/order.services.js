@@ -6,8 +6,8 @@ async function findAllOrders(query) {
     return await orderDAO.findAllElements(query);
 };
 
-async function findOrdersByUserId(userId) {
-    return await orderDAO.findOrdersByUserId(userId);
+async function findOrdersByUserId(userId, query) {
+    return await orderDAO.findOrdersByUserId(userId, query);
 };
 
 async function getOrdersStats(previousMonth) {

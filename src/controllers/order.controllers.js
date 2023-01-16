@@ -4,8 +4,8 @@ async function findAllOrdersController(query) {
     return await findAllOrders(query);
 };
 
-async function findOrdersByUserIdController(userId) {
-    return await findOrdersByUserId(userId);
+async function findOrdersByUserIdController(userId, query) {
+    return await findOrdersByUserId(userId, query);
 };
 
 async function getOrdersStatsController(previousMonth) {

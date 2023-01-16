@@ -25,9 +25,14 @@ class OrderDAO extends DAOContainer {
         }
     };
 
-    async findOrdersByUserId(userId) {
+    async findOrdersByUserId(userId, query) {
         try {
-            const orders = await OrderModel.find({ userId });
+            let orders;
+            if(query) {
+                orders = await OrderModel.find({ userId} ).sort({ _id: -1 }).limit(3);
+            } else {
+                orders = await OrderModel.find({ userId });
+            };
             return orders;
         } catch (err) {
             console.log(err)

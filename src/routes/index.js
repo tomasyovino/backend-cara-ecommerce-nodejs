@@ -9,9 +9,9 @@ import paymentRouter from "./payment.js";
 const router = Router();
 
 router.use("/user", userRouter);
-router.use("/product", productRouter);
+router.use("/products", productRouter);
 router.use("/cart", cartRouter);
-router.use("/order", orderRouter);
+router.use("/orders", orderRouter);
 router.use("/auth", authRouter);
 router.use("/checkout", paymentRouter);
 

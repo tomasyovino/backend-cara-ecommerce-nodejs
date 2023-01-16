@@ -12,7 +12,7 @@ class DAOContainer {
         let elements;
         try {
             if(query) {
-                elements = await this.collection.find().sort({ _id: -1 }).limit(5);
+                elements = await this.collection.find().sort({ _id: -1 }).limit(3);
             } else {
                 elements = await this.collection.find();
             }

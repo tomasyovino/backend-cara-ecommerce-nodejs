@@ -14,7 +14,7 @@ userRouter.get("/", verifyTokenAndAdmin, async (req, res) => {
     }
 })
 
-userRouter.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
+userRouter.get("/find/:id", async (req, res) => {
     try {
         const user = await findUserByIdController(req.params.id);
         res.status(200).json(user);

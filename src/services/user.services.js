@@ -4,9 +4,9 @@ import jwt from "jsonwebtoken";
 
 const userDAO = UserDAO.createInstance();
 
-async function createUser(username, password, email) {
+async function createUser(firstName, lastName, username, email, address, password) {
     try {
-        return await userDAO.createUser(username, password, email);
+        return await userDAO.createUser(firstName, lastName, username, email, address, password);
     } catch (err) {
         console.log(err);
     };

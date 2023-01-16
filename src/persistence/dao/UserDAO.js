@@ -15,12 +15,15 @@ class UserDAO extends DAOContainer {
         return instance;
     };
 
-    async createUser(username, password, email) {
+    async createUser(firstName, lastName, username, email, address, password) {
         try {
             const newUser = await UserModel({
+                firstName,
+                lastName,
                 username,
-                password,
-                email
+                email,
+                address,
+                password
             });
             await newUser.save();
             

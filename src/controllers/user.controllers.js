@@ -2,10 +2,10 @@ import { createUser, findAllUsers, findUserById, findUserByParam, getUserStats, 
 import config from "../utils/config.js";
 import UserDTO from "../persistence/dto/UserDTO.js";
 
-async function createUserController(username, password, email) {
+async function createUserController(firstName, lastName, username, email, address, password) {
     try {
         const hashedPassword = await hashUserPassword(password);
-        return await createUser(username, hashedPassword, email);
+        return await createUser(firstName, lastName, username, email, address, hashedPassword);
     } catch (err) {
         console.log(err);
     };
