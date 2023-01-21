@@ -35,7 +35,7 @@ userRouter.get("/stats", verifyTokenAndAdmin, async (req, res) => {
     };
 });
 
-userRouter.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
+userRouter.put("/:id", async (req, res) => {
     try {
         if(req.body.password) {
             req.body.password = await hashUserPasswordController(req.body.password);
