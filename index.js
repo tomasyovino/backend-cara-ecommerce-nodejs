@@ -9,7 +9,6 @@ app.use(cors());
 app.use(express.json());
 app.use("/api", router);
 
-app.listen(config.PORT, (req, res) => {
-    console.log(`Server is running at port ${config.PORT}`)
-    res.sendStatus(200)
+app.listen(config.PORT, () => {
+    console.log(`Server is running at port ${config.PORT}`);
 });
