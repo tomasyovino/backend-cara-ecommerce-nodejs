@@ -43,7 +43,7 @@ async function hashUserPassword(password) {
 
 function compareUserPassword(password, user, userDTO, jwt_sec, res) {
     bcrypt.compare(password, user.password, (err, isMatch) => {
-        if (err) res.status(500).json(err);
+        if (err) res.status(401).json(err);
         if (isMatch) {
             const secureUser = new userDTO(user);
             const accessToken = jwt.sign({
@@ -53,7 +53,7 @@ function compareUserPassword(password, user, userDTO, jwt_sec, res) {
             jwt_sec,
             { expiresIn: "3d" }
             );
-            return res.status(201).json({...secureUser, accessToken});
+            return res.status(200).json({...secureUser, accessToken});
         }; 
         return res.status(401).json({ message: "The user password is wrong"});
     });
